@@ -36,7 +36,9 @@ have to be a standard dbms, it wasn't until the end that I thought about how I'm
 file for data to be inspected.
 
 ## Build and Run Instructions
-This assumes you already have docker installed
+Pre-cloning assumptions:
+* You have docker installed
+* You have JRE 17
 
 After cloning this repo:
 * Start Dependency (Axon Server Eventstore)
