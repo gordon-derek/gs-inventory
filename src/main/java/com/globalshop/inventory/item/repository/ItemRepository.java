@@ -24,12 +24,10 @@ public class ItemRepository {
     }
 
     public Item getItem(UUID id) {
-        Item item = store.get(id.toString());
-        if(item == null) {
-            // not found exception
-        }
-        return item;
+        return store.get(id.toString());
     }
+
+    public Item[] getAll() { return store.values().toArray(new Item[0]); }
 
     public void updateItem(Item item) {
         store.replace(item.getId().toString(), item);

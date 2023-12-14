@@ -2,4 +2,4 @@ server:
   port : 3000
 axon:
   axonserver:
-    servers: 127.0.0.1:8124
+    servers: localhost:8124

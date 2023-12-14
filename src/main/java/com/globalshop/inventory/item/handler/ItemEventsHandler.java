@@ -5,6 +5,7 @@ import com.globalshop.inventory.item.event.ItemAddedEvent;
 import com.globalshop.inventory.item.event.ItemAdjustedEvent;
 import com.globalshop.inventory.item.event.ItemRemovedEvent;
 import com.globalshop.inventory.item.query.FindItemQuery;
+import com.globalshop.inventory.item.query.GetAllItemsQuery;
 import com.globalshop.inventory.item.repository.ItemRepository;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
@@ -34,9 +35,18 @@ public class ItemEventsHandler {
     }
 
     /******** Query Handlers ********/
+    @QueryHandler
+    public Item[] handle(GetAllItemsQuery query) {
+        return items.getAll();
+    }
 
     @QueryHandler
     public Item handle(FindItemQuery query) {
-        return items.getItem(query.getItemId());
+        // Do we want to return "deleted" items?
+        Item item = items.getItem(query.getItemId());
+        if(item == null) {
+            throw new RuntimeException("Resource not found");
+        }
+        return item;
     }
 }

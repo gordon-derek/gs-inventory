@@ -42,9 +42,7 @@ public class ItemAggregate {
 
     @CommandHandler
     public void handle(AdjustItemCommand command) {
-        // error out if no aggregate found
-        if(itemId == null)
-            throw new RuntimeException("not found");
+        // set isDeleted false by creating new item and overwrite
         Item adjusted = new Item(itemId, description, quantity);
         if(command.getQuantity() != null)
             adjusted.setQuantity(command.getQuantity());
@@ -61,10 +59,8 @@ public class ItemAggregate {
 
     @CommandHandler
     public void handle(RemoveItemCommand command) {
-        // error out if no aggregate found
-        if(itemId == null) {
-            throw new RuntimeException("not found");
-        } else if(isDeleted) {
+        // error out if already deleted
+        if(isDeleted) {
             throw new RuntimeException("already deleted");
         }
 

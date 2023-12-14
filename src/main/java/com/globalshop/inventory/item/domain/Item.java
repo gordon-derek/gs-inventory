@@ -13,7 +13,7 @@ public class Item {
     // CQRS with event sourcing doesn't hard delete
     private boolean isDeleted;
 
-    public Item(UUID id, String description, int quantity) {
+    public Item(UUID id, String description, Integer quantity) {
         this.id = id;
         this.description = description;
         this.quantity = quantity;
