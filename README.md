@@ -41,6 +41,9 @@ This assumes you already have docker installed
 After cloning this repo:
 * Start Dependency (Axon Server Eventstore)
   * Run `docker-compose up`
+  * If first time
+    * Navigate to http://localhost:8024
+    * Complete setup of axon server with default values
 * Build the project
   * `./gradlew build`
 * Test the project

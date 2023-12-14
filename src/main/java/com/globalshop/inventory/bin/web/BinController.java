@@ -86,7 +86,10 @@ public class BinController {
             seed = (JSONArray) parser.parse(new FileReader(jsonStore));
         }
         else {
-            seed = (JSONArray) parser.parse(new FileReader(System.getProperty("user.dir") + "/db/bin/seed.json"));
+            seed = (JSONArray) parser.parse(new FileReader(System.getProperty("user.dir") +
+                    File.separator + "db" +
+                    File.separator + "bin" +
+                    File.separator + "seed.json"));
         }
         for(Object o : seed) {
             JSONObject jBin = (JSONObject) o;
