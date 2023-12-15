@@ -8,6 +8,8 @@ import com.globalshop.inventory.item.domain.Item;
 import com.globalshop.inventory.item.event.ItemAddedEvent;
 import com.globalshop.inventory.item.event.ItemAdjustedEvent;
 import com.globalshop.inventory.item.event.ItemRemovedEvent;
+import org.axonframework.eventsourcing.eventstore.EventStoreException;
+import org.axonframework.modelling.command.AggregateInvocationException;
 import org.axonframework.modelling.command.AggregateNotFoundException;
 import org.axonframework.test.aggregate.AggregateTestFixture;
 import org.axonframework.test.aggregate.FixtureConfiguration;
@@ -32,6 +34,16 @@ public class ItemAggregateTests {
         fixture.givenNoPriorActivity()
                 .when(new AddItemCommand(itemId, description, quantity))
                 .expectEvents(new ItemAddedEvent(new Item(itemId, description, quantity)));
+    }
+
+    @Test
+    void addDuplicateItem() {
+        UUID itemId = UUID.randomUUID();
+        String description = "Honda CRF250R";
+        int quantity = 5;
+        fixture.given(new ItemAddedEvent(new Item(itemId, description, quantity)))
+                .when(new AddItemCommand(itemId, description, quantity))
+                .expectException(EventStoreException.class);
     }
 
     @Test
